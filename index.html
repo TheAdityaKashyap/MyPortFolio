@@ -3,80 +3,965 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aditya Kashyap - Portfolio</title>
+    <title>Aditya Kashyap | Sales Coordinator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        /* Base Styles */
+        :root {
+            --primary-color: #0a0a0a;
+            --secondary-color: #1a1a1a;
+            --accent-color: #2563eb;
+            --accent-light: #3b82f6;
+            --text-color: #ffffff;
+            --light-text: #b3b3b3;
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+            --section-spacing: 100px;
+        }
+
+        * {
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section {
+            padding: var(--section-spacing) 0;
+        }
+
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 3rem;
+        }
+
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background-color: var(--accent-color);
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            color: var(--light-text);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            background-color: var(--accent-light);
+            transform: translateY(-3px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        /* Header & Navigation */
         header {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 1em;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 0;
+            background-color: rgba(10, 10, 10, 0.95);
+            z-index: 1000;
+            transition: var(--transition);
         }
-        nav ul {
-            list-style: none;
-            padding: 0;
-            background-color: #444;
-            text-align: center;
+
+        header.scrolled {
+            padding: 15px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
         }
-        nav ul li {
-            display: inline;
-            margin: 0 1em;
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        nav ul li a {
-            color: white;
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-color);
             text-decoration: none;
         }
-        section {
-            padding: 2em;
-            margin: 1em;
-            background: white;
-            border-radius: 8px;
+
+        .logo span {
+            color: var(--accent-color);
         }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(10, 10, 10, 0.9), rgba(10, 10, 10, 0.9)), 
+                        url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 20px;
+        }
+
+        .highlight {
+            color: var(--accent-color);
+        }
+
+        /* About Section */
+        .about {
+            background-color: var(--secondary-color);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-image {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .personal-info {
+            margin-bottom: 2rem;
+        }
+
+        .info-item {
+            display: flex;
+            margin-bottom: 10px;
+        }
+
+        .info-label {
+            width: 120px;
+            font-weight: 600;
+        }
+
+        .info-value {
+            color: var(--light-text);
+        }
+
+        /* Education & Experience */
+        .education-experience {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .timeline {
+            position: relative;
+        }
+
+        .timeline:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background-color: var(--accent-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 30px;
+        }
+
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+        }
+
+        .timeline-date {
+            font-size: 0.9rem;
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .timeline-title {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .timeline-subtitle {
+            color: var(--light-text);
+            margin-bottom: 10px;
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-category {
+            background-color: var(--secondary-color);
+            padding: 25px;
+            border-radius: var(--border-radius);
+        }
+
+        .skill-category h3 {
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill {
+            background-color: rgba(37, 99, 235, 0.1);
+            color: var(--accent-color);
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background-color: var(--secondary-color);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-content {
+            padding: 25px;
+        }
+
+        .project-content h3 {
+            margin-bottom: 10px;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .project-tag {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--light-text);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        .achievement {
+            background-color: rgba(37, 99, 235, 0.05);
+            border-left: 3px solid var(--accent-color);
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        /* Contact Section */
+        .contact {
+            background-color: var(--secondary-color);
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(37, 99, 235, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-color);
+            font-size: 1.2rem;
+        }
+
+        .contact-form {
+            background-color: var(--primary-color);
+            padding: 30px;
+            border-radius: var(--border-radius);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            color: var(--text-color);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
         footer {
+            background-color: #050505;
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background-color: var(--secondary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
             text-align: center;
-            padding: 1em;
-            background-color: #333;
-            color: white;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            h2 {
+                font-size: 2.2rem;
+            }
+            
+            .about-content,
+            .education-experience,
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-image {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--primary-color);
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+                transition: var(--transition);
+            }
+            
+            .nav-links.active {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 30px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            section {
+                padding: 70px 0;
+            }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Aditya Kashyap<h1>
-        <p>Web Developer/Designer</p>
+    <!-- Header -->
+    <header id="header">
+        <div class="container nav-container">
+            <a href="#" class="logo">Aditya<span>Kashyap</span></a>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
     </header>
-    <nav>
-        <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
-    <section id="about">
-        <h2>About Me</h2>
-        <p>I'm a passionate developer with experience in HTML, CSS, and JavaScript. I love creating beautiful and functional websites.</p>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Aditya <span class="highlight">Kashyap</span></h1>
+                <h2>Sales Coordinator </h2>
+                <p>A results-driven professional with expertise in sales coordination, data analysis, and business intelligence. Combining financial education with technical skills to drive efficiency and insights.</p>
+                <div class="hero-btns">
+                    <a href="#projects" class="btn">View My Work</a>
+                    <a href="#contact" class="btn btn-outline">Get In Touch</a>
+                </div>
+            </div>
+        </div>
     </section>
-    <section id="projects">
-        <h2>Projects</h2>
-        <ul>
-            <li>Project 1: Description here.</li>
-            <li>Project 2: Description here.</li>
-            <li>Project 3: Description here.</li>
-        </ul>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>I'm a Sales Coordinator and Data Analyst with a Bachelor's degree in Finance. My background in financial education combined with technical skills in data analysis allows me to bridge the gap between business operations and data-driven insights.</p>
+                    <p>Currently working at Sea Linkers Pvt. Ltd., I manage complex sales operations while developing analytical tools to improve efficiency. My voluntary initiatives in data analytics have resulted in significant cost savings and process improvements.</p>
+                    
+                    <div class="personal-info">
+                        <div class="info-item">
+                            <div class="info-label">Date of Birth:</div>
+                            <div class="info-value">8th August 2002</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Age:</div>
+                            <div class="info-value">23 years</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Location:</div>
+                            <div class="info-value">Colaba, Mumbai, India</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Education:</div>
+                            <div class="info-value">B.M.S (Finance), Mumbai University</div>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-btns">
+                        <a href="https://www.linkedin.com/in/aditya-kashyap-235703288" class="btn" target="_blank">
+                            <i class="fab fa-linkedin"></i> LinkedIn
+                        </a>
+                        <a href="https://github.com/TheAdityaKashyap" class="btn btn-outline" target="_blank">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Aditya Kashyap">
+                </div>
+            </div>
+        </div>
     </section>
-    <section id="contact">
-        <h2>Contact</h2>
-        <p>Email: your.email@example.com</p>
-        <p>LinkedIn: linkedin.com/in/yourname</p>
+
+    <!-- Education & Experience Section -->
+    <section id="experience">
+        <div class="container">
+            <h2 class="section-title">Education & Experience</h2>
+            <div class="education-experience">
+                <!-- Education -->
+                <div>
+                    <h3>Education</h3>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">2023</div>
+                            <div class="timeline-title">B.M.S (Finance)</div>
+                            <div class="timeline-subtitle">Sant Gadge Maharaj College of Commerce and Economics</div>
+                            <p>Percentage: 85%</p>
+                            <p>Achievement: Student of the Year 2022-23</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2020</div>
+                            <div class="timeline-title">HSC</div>
+                            <div class="timeline-subtitle">Sant Gadge Maharaj College of Commerce and Economics</div>
+                            <p>Percentage: 65.96%</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2018</div>
+                            <div class="timeline-title">SSC</div>
+                            <div class="timeline-subtitle">St. Joseph High School</div>
+                            <p>Percentage: 62.80%</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Experience -->
+                <div>
+                    <h3>Work Experience</h3>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">May 2024 - Present</div>
+                            <div class="timeline-title">Sales Coordinator</div>
+                            <div class="timeline-subtitle">Sea Linkers Pvt. Ltd.</div>
+                            <p>Manage quotations, proforma invoices, and work orders using SAP. Handle 23,000+ item codes related to lifting & hoisting equipment.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">June 2023 - June 2024</div>
+                            <div class="timeline-title">Export Sales Executive</div>
+                            <div class="timeline-subtitle">Ritinox Overseas LLP</div>
+                            <p>Coordinated export sales operations, handled client communication and documentation for overseas orders.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">Sept 2021 - Feb 2023</div>
+                            <div class="timeline-title">Sales Executive</div>
+                            <div class="timeline-subtitle">Digilegal Pvt. Ltd.</div>
+                            <p>Managed client relationships, generated quotations, and closed deals while coordinating with teams for service delivery.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
+
+    <!-- Skills Section -->
+    <section class="skills" id="skills">
+        <div class="container">
+            <h2 class="section-title">Skills & Expertise</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3>Business Tools</h3>
+                    <div class="skills-list">
+                        <span class="skill">SAP</span>
+                        <span class="skill">Tally</span>
+                        <span class="skill">Advanced Excel</span>
+                        <span class="skill">Power BI</span>
+                        <span class="skill">Tableau</span>
+                        <span class="skill">SQL</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Programming & Analytics</h3>
+                    <div class="skills-list">
+                        <span class="skill">Python</span>
+                        <span class="skill">Pandas</span>
+                        <span class="skill">NumPy</span>
+                        <span class="skill">Matplotlib</span>
+                        <span class="skill">SentenceTransformer</span>
+                        <span class="skill">MySQL</span>
+                        <span class="skill">Data Cleaning</span>
+                        <span class="skill">Standardization</span>
+                        <span class="skill">Time Series Forecasting</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Soft Skills</h3>
+                    <div class="skills-list">
+                        <span class="skill">Sales Coordination</span>
+                        <span class="skill">Client Communication</span>
+                        <span class="skill">Reporting & Documentation</span>
+                        <span class="skill">Problem-Solving</span>
+                        <span class="skill">Analytical Thinking</span>
+                        <span class="skill">Project Management</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <h2 class="section-title">Projects & Achievements</h2>
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3>Freight Analysis Dashboard</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">Power BI</span>
+                            <span class="project-tag">Data Analysis</span>
+                            <span class="project-tag">Cost Optimization</span>
+                        </div>
+                        <p>Developed a comprehensive freight analysis dashboard that identified cost-saving opportunities in logistics operations.</p>
+                        <div class="achievement">
+                            <p><strong>Achievement:</strong> Saved company 20+ lakhs rupees in freight costs through data-driven optimization.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3>Python Item Matcher System</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">Python</span>
+                            <span class="project-tag">Pandas</span>
+                            <span class="project-tag">Automation</span>
+                        </div>
+                        <p>Built a Python-based system to match and identify items from a database of 23,000+ product codes with descriptions.</p>
+                        <div class="achievement">
+                            <p><strong>Achievement:</strong> Significantly simplified code identification process, improving operational efficiency.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3>KPI Reporting Automation</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">Power BI</span>
+                            <span class="project-tag">Tableau</span>
+                            <span class="project-tag">Dashboard</span>
+                        </div>
+                        <p>Created automated Power BI/Tableau dashboards for tracking key performance indicators (transactions per day/week/month).</p>
+                        <div class="achievement">
+                            <p><strong>Achievement:</strong> Improved reporting efficiency and provided management with data-driven insights.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 4 -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3>Data Standardization Project</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">Python</span>
+                            <span class="project-tag">Data Cleaning</span>
+                            <span class="project-tag">Standardization</span>
+                        </div>
+                        <p>Standardized 13,000+ company names in the database to ensure consistency and improve data quality.</p>
+                        <div class="achievement">
+                            <p><strong>Achievement:</strong> Enhanced data integrity and reporting accuracy across the organization.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h3>Location</h3>
+                            <p>Colaba, Mumbai, India</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h3>Email</h3>
+                            <p>adityakashyap@example.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-linkedin"></i>
+                        </div>
+                        <div>
+                            <h3>LinkedIn</h3>
+                            <p>linkedin.com/in/aditya-kashyap-235703288</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <div>
+                            <h3>GitHub</h3>
+                            <p>github.com/TheAdityaKashyap</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" class="form-control" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
-        <p>&copy; 2025 Your Name. All rights reserved.</p>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">Aditya<span>Kashyap</span></div>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/aditya-kashyap-235703288" class="social-link" target="_blank">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://github.com/TheAdityaKashyap" class="social-link" target="_blank">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Aditya Kashyap. All Rights Reserved.</p>
+            </div>
+        </div>
     </footer>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+
+        hamburger.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        const navItems = document.querySelectorAll('.nav-links a');
+        navItems.forEach(item => {
+            item.addEventListener('click', function() {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Form submission
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! I will get back to you soon.');
+            contactForm.reset();
+        });
+    </script>
 </body>
 </html>
