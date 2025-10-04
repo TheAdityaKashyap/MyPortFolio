@@ -306,6 +306,116 @@
       color: var(--fade);
       margin-top: 3rem;
     }
+    /* Styled Table */
+    .styled-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 1rem;
+      background: var(--background);
+      color: var(--text);
+      box-shadow: 0 2px 10px rgba(56,189,248,0.08);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .styled-table th, .styled-table td {
+      border: 1.5px solid var(--accent);
+      padding: 0.75rem 0.5rem;
+      text-align: left;
+      transition: background 0.3s, color 0.3s;
+    }
+    .styled-table th {
+      background: var(--subtle);
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+    .styled-table tbody tr {
+      transition: background 0.3s, color 0.3s, transform 0.2s;
+    }
+    .styled-table tbody tr:hover {
+      background: var(--accent);
+      color: var(--background);
+      transform: scale(1.01);
+      box-shadow: 0 4px 16px rgba(56,189,248,0.15);
+      cursor: pointer;
+    }
+    .styled-table tbody tr td {
+      transition: background 0.3s, color 0.3s;
+    }
+    /* Experience Section Styles */
+    .experience-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+    .experience-card {
+      background: var(--subtle);
+      border-left: 5px solid var(--accent);
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(56,189,248,0.10);
+      padding: 1.5rem 1.5rem 1rem 1.5rem;
+      position: relative;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .experience-card:hover {
+      transform: scale(1.02) translateY(-4px);
+      box-shadow: 0 8px 32px rgba(56,189,248,0.18);
+      border-left: 5px solid var(--secondary);
+    }
+    .exp-header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      align-items: baseline;
+      margin-bottom: 0.7rem;
+    }
+    .exp-company {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 1.1rem;
+    }
+    .exp-role {
+      font-weight: 600;
+      color: var(--accent);
+      font-size: 1rem;
+    }
+    .exp-duration {
+      margin-left: auto;
+      color: var(--fade);
+      font-size: 0.95rem;
+    }
+    .exp-highlight {
+      background: rgba(56,189,248,0.07);
+      border-radius: 6px;
+      padding: 0.7rem 1rem;
+      margin-top: 0.3rem;
+      margin-bottom: 0.2rem;
+      box-shadow: 0 1px 4px rgba(56,189,248,0.06);
+    }
+    .exp-highlight ul {
+      margin: 0.5rem 0 0.5rem 1.2rem;
+    }
+    .exp-metrics {
+      margin-top: 0.7rem;
+      background: rgba(6,182,212,0.09);
+      border-left: 3px solid var(--secondary);
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+    }
+    .exp-metrics ul {
+      margin: 0.3rem 0 0.3rem 1.2rem;
+    }
+    @media (max-width: 700px) {
+      .experience-card {
+        padding: 1rem 0.7rem 0.7rem 0.7rem;
+      }
+      .exp-header {
+        flex-direction: column;
+        gap: 0.3rem;
+      }
+    }
     /* Responsive Adjustments */
     @media (max-width: 600px) {
       .hero-content h1 {
@@ -401,9 +511,9 @@
     <section id="education" aria-labelledby="education-title">
       <h2 class="section-title" id="education-title">Education</h2>
       <div style="overflow-x:auto;">
-        <table style="width:100%;border-collapse:collapse;">
+        <table class="styled-table">
           <thead>
-            <tr style="background:var(--subtle);color:var(--accent);">
+            <tr>
               <th>Course</th>
               <th>School / College</th>
               <th>Board / University</th>
@@ -445,59 +555,70 @@
     <!-- WORK EXPERIENCE SECTION -->
     <section id="experience" aria-labelledby="experience-title">
       <h2 class="section-title" id="experience-title">Work Experience</h2>
-      <table style="width:100%;border-collapse:collapse;">
-        <thead>
-          <tr style="background:var(--subtle);color:var(--accent);">
-            <th>Company</th>
-            <th>Role</th>
-            <th>Duration</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Sea Linkers Pvt. Ltd.</td>
-            <td>Sales Coordinator</td>
-            <td>May 2024 – Present</td>
-          </tr>
-          <tr>
-            <td>Ritinox Overseas LLP</td>
-            <td>Export Sales Executive</td>
-            <td>June 2023 – June 2024</td>
-          </tr>
-          <tr>
-            <td>Digilegal Pvt. Ltd.</td>
-            <td>Sales Executive</td>
-            <td>Sept 2021 – Feb 2023</td>
-          </tr>
-        </tbody>
-      </table>
-      <br />
-      <h3>Key Responsibilities & Achievements</h3>
-      <ul>
-        <li><strong>Sea Linkers Pvt. Ltd. (May 2024 – Present):</strong>
-          <ul>
-            <li>Manage quotations, proforma invoices, and work orders using SAP.</li>
-            <li>Handle 23,000+ item codes related to lifting & hoisting equipment.</li>
-            <li>Built Power BI/Tableau dashboards for KPI reporting (transactions per day/week/month).</li>
-            <li>Developed Python-based item matcher system to simplify code identification voluntarily.</li>
-            <li>Improved reporting efficiency and supported management with data-driven insights.</li>
-          </ul>
-        </li>
-        <li><strong>Ritinox Overseas LLP (Jun 2023 – Jun 2024):</strong>
-          <ul>
-            <li>Coordinated export sales operations.</li>
-            <li>Handled client communication and documentation for overseas orders.</li>
-            <li>Assisted in preparing export quotations and shipping schedules.</li>
-          </ul>
-        </li>
-        <li><strong>Digilegal Pvt. Ltd. (Sept 2021 – Feb 2023):</strong>
-          <ul>
-            <li>Worked as Sales Executive managing client relationships.</li>
-            <li>Generated quotations and closed deals.</li>
-            <li>Coordinated with teams to ensure smooth delivery of services.</li>
-          </ul>
-        </li>
-      </ul>
+      <div class="experience-timeline">
+
+        <!-- Sea Linkers Pvt. Ltd. -->
+        <div class="experience-card">
+          <div class="exp-header">
+            <span class="exp-company">Sea Linkers Pvt. Ltd.</span>
+            <span class="exp-role">Sales Coordinator</span>
+            <span class="exp-duration">May 2024 – Present</span>
+          </div>
+          <div class="exp-highlight">
+            <strong>Key Responsibilities & Achievements:</strong>
+            <ul>
+              <li>Manage quotations, proforma invoices, and work orders using SAP.</li>
+              <li>Handle 23,000+ item codes related to lifting & hoisting equipment.</li>
+              <li>Built Power BI/Tableau dashboards for KPI reporting (transactions per day/week/month).</li>
+              <li>Developed Python-based item matcher system to simplify code identification voluntarily.</li>
+              <li>Improved reporting efficiency and supported management with data-driven insights.</li>
+            </ul>
+            <!-- <div class="exp-metrics">
+              <strong>Key Metrics:</strong>
+              <ul>
+                <li>Managed 23,000+ SKUs</li>
+                <li>Automated KPI reporting (daily, weekly, monthly)</li>
+                <li>Standardized 13,000+ company names</li>
+                <li>Reduced freight costs by 20+ lakhs</li>
+              </ul>
+            </div> -->
+          </div>
+        </div>
+
+        <!-- Ritinox Overseas LLP -->
+        <div class="experience-card">
+          <div class="exp-header">
+            <span class="exp-company">Ritinox Overseas LLP</span>
+            <span class="exp-role">Export Sales Executive</span>
+            <span class="exp-duration">June 2023 – June 2024</span>
+          </div>
+          <div class="exp-highlight">
+            <strong>Key Responsibilities & Achievements:</strong>
+            <ul>
+              <li>Coordinated export sales operations.</li>
+              <li>Handled client communication and documentation for overseas orders.</li>
+              <li>Assisted in preparing export quotations and shipping schedules.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Digilegal Pvt. Ltd. -->
+        <div class="experience-card">
+          <div class="exp-header">
+            <span class="exp-company">Digilegal Pvt. Ltd.</span>
+            <span class="exp-role">Sales Executive</span>
+            <span class="exp-duration">Sept 2021 – Feb 2023</span>
+          </div>
+          <div class="exp-highlight">
+            <strong>Key Responsibilities & Achievements:</strong>
+            <ul>
+              <li>Worked as Sales Executive managing client relationships.</li>
+              <li>Generated quotations and closed deals.</li>
+              <li>Coordinated with teams to ensure smooth delivery of services.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- SKILLS SECTION -->
