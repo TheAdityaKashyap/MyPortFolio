@@ -437,31 +437,43 @@
       }
     }
     /* Additional Styles for Data Visualizations Section */
-    .tableau-container-wide {
-      width: 100%;
-      max-width: 90vw;
-      min-width: 0;
-      height: 75vh;
-      min-height: 400px;
-      margin: 0 auto 2rem auto !important;
-      border-radius: 18px;
-      overflow-x: auto;
-      overflow-y: hidden;
-      background: #181f2a;
-      box-shadow: 0 0 24px 2px #2563eb55;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .tableau-container-wide iframe {
-      width: 100%;
-      height: 75vh;
-      min-height: 400px;
-      border: none;
-      display: block;
-      background: #fff;
-      max-width: 100vw;
-    }
+.tableau-container-wide {
+  width: 100%;
+  max-width: 90vw;
+  min-width: 0;
+  /* You may need to remove or override height/min-height here if it causes issues */
+  margin: 0 auto 2rem auto !important;
+  border-radius: 18px;
+  overflow-x: auto;
+  overflow-y: hidden; /* Prevent iframe scrollbar */
+  background: #181f2a;
+  box-shadow: 0 0 24px 2px #2563eb55;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tableau-container-wide iframe {
+  /* Force a specific size that fits the Tableau visualization */
+  width: 1100px; /* Adjusted width */
+  height: 950px;  /* Adjusted height for tall visualization */
+  min-height: 400px;
+  border: none;
+  display: block;
+  background: #fff;
+  max-width: 100vw;
+}
+
+@media (max-width: 700px) {
+  .tableau-container-wide iframe {
+    /* Use a smaller fixed size on mobile to prevent cropping */
+    width: 450px;
+    height: 600px;
+    /* Ensure the container allows horizontal scrolling if necessary */
+    max-width: 100vw;
+    border-radius: 0;
+  }
+}
     @media (max-width: 1100px) {
       .tableau-container-wide {
         max-width: 98vw;
@@ -718,16 +730,16 @@
 
     <!-- DATA VISUALIZATIONS SECTION -->
     <section id="visualizations" aria-labelledby="visualizations-title" style="display:flex; flex-direction:column; align-items:center;">
-      <h2 class="section-title" id="visualizations-title" style="margin: 0 auto 1.5rem auto; text-align:center; width:100%;">Data Visualizations</h2>
-      <div class="tableau-container tableau-container-wide" style="margin: 0 auto; width: 100%; max-width: 90vw; min-width: 0;">
-        <iframe 
-          src="https://public.tableau.com/views/ClientWiseFreightCosts/TopClients?:embed=y&:display_count=yes&:showVizHome=no"
-          allowfullscreen 
-          title="Client Wise Freight Costs"
-          style="width: 100%; height: 75vh; min-height: 400px; border: none; display: block; background: #fff; max-width: 100vw;">
-        </iframe>
-      </div>
-    </section>
+  <h2 class="section-title" id="visualizations-title" style="margin: 0 auto 1.5rem auto; text-align:center; width:100%;">Data Visualizations</h2>
+  <div class="tableau-container tableau-container-wide" style="margin: 0 auto; width: 100%; max-width: 90vw; min-width: 0;">
+    <iframe 
+      src="https://public.tableau.com/views/ClientWiseFreightCosts/TopClients?:embed=y&:display_count=yes&:showVizHome=no<mark style="background-color: #BBDEFB;">&:toolbar=no&:tabs=no&:device=desktop</mark>"
+      allowfullscreen 
+      title="Client Wise Freight Costs"
+      style="border: none; display: block; background: #fff;">
+      </iframe>
+  </div>
+</section>
     
 
     <!-- USE CASES SECTION -->
