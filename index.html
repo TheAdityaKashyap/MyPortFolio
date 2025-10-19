@@ -17,6 +17,8 @@
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
+  <!-- Font Awesome for project icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 
   <style>
     /* CSS Variables for Dark Mode */
@@ -55,7 +57,7 @@
       line-height: 1.6;
       scroll-behavior: smooth;
       transition: background-color 0.3s ease, color 0.3s ease;
-      cursor: default; /* Changed from 'none' to 'default' */
+      cursor: default; /* default cursor */
     }
     a {
       color: var(--accent);
@@ -76,20 +78,6 @@
       width: 0%;
       z-index: 10000;
       transition: width 0.1s ease-out;
-    }
-    /* Custom Cursor */
-    .custom-cursor {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 15px;
-      height: 15px;
-      border: 2px solid var(--accent);
-      border-radius: 50%;
-      pointer-events: none;
-      transform: translate(-50%, -50%);
-      transition: background-color 0.2s ease, transform 0.1s ease;
-      z-index: 10000;
     }
     /* Header/Hero Section */
     .hero {
@@ -139,7 +127,7 @@
       color: var(--light);
       margin-bottom: 0.5rem;
     }
-    
+
     /* Navigation */
     nav {
       background: var(--subtle);
@@ -234,27 +222,7 @@
       width: 100%;
       height: 100%;
       border: none;
-      loading: lazy;
-    }
-    /* Testimonials Slider */
-    .testimonial-slider {
-      position: relative;
-      overflow: hidden;
-      height: 150px;
-      margin-top: 1rem;
-    }
-    .testimonial {
-      position: absolute;
-      width: 100%;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-      text-align: center;
-      font-style: italic;
-      padding: 0 20px;
-    }
-    .testimonial.active {
-      opacity: 1;
-      position: relative;
+      display: block;
     }
     /* Contact Form */
     .contact-form {
@@ -431,58 +399,79 @@
         align-items: flex-end;
       }
     }
-    /* Additional Styles for Data Visualizations Section */
-.tableau-container-wide {
-  width: 100%;
-  max-width: 90vw;
-  min-width: 0;
-  /* You may need to remove or override height/min-height here if it causes issues */
-  margin: 0 auto 2rem auto !important;
-  border-radius: 18px;
-  overflow-x: auto;
-  overflow-y: hidden; /* Prevent iframe scrollbar */
-  background: #181f2a;
-  box-shadow: 0 0 24px 2px #2563eb55;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.tableau-container-wide iframe {
-  /* Force a specific size that fits the Tableau visualization */
-  width: 1100px; /* Adjusted width */
-  height: 950px;  /* Adjusted height for tall visualization */
-  min-height: 400px;
-  border: none;
-  display: block;
-  background: #fff;
-  max-width: 100vw;
-}
-
-@media (max-width: 700px) {
-  .tableau-container-wide iframe {
-    /* Use a smaller fixed size on mobile to prevent cropping */
-    width: 450px;
-    height: 600px;
-    /* Ensure the container allows horizontal scrolling if necessary */
-    max-width: 100vw;
-    border-radius: 0;
-  }
-}
-    @media (max-width: 1100px) {
-      .tableau-container-wide {
-        max-width: 98vw;
-        border-radius: 8px;
-      }
+    /* Replace previous .tableau-container-wide rules with responsive wrapper + fullscreen support */
+    .tableau-wrapper {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto 2rem;
+      padding: 0;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
+
+    .tableau-container-wide {
+      width: 100%;
+      height: 0;
+      padding-bottom: 66.666%; /* 3:2 aspect ratio fallback */
+      position: relative;
+      background: #181f2a;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 36px rgba(2,6,23,0.45);
+      transition: box-shadow 0.2s ease;
+    }
+
+    .tableau-container-wide iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+      background: #fff;
+    }
+
+    .fullscreen-toggle {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: var(--accent);
+      border: none;
+      padding: 0.45rem 0.6rem;
+      border-radius: 6px;
+      color: var(--background);
+      font-size: 1rem;
+      cursor: pointer;
+      z-index: 10;
+      box-shadow: 0 6px 18px rgba(2,6,23,0.35);
+      transition: background 0.18s ease, transform 0.12s ease;
+    }
+    .fullscreen-toggle:hover { transform: translateY(-2px); background: var(--secondary); }
+
+    /* fullscreen visual (applies when container has .is-fullscreen or native fullscreen) */
+    .tableau-container-wide.is-fullscreen {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      padding: 0 !important;
+      border-radius: 0 !important;
+      z-index: 2000 !important;
+      box-shadow: none !important;
+    }
+    .tableau-container-wide.is-fullscreen iframe {
+      height: 100vh !important;
+    }
+
+    /* small screen adjustments */
     @media (max-width: 700px) {
-      .tableau-container-wide, .tableau-container-wide iframe {
-        max-width: 100vw;
-        width: 100vw;
-        height: 45vh;
-        min-height: 220px;
-        border-radius: 0;
-      }
+      .tableau-wrapper { padding: 0 12px; }
+      .tableau-container-wide { padding-bottom: 75%; border-radius: 6px; }
+      .fullscreen-toggle { top: 8px; right: 8px; padding: 0.35rem; }
     }
   </style>
 
@@ -504,12 +493,9 @@
     }
   </script>
 </head>
-<body class="dark-mode">
+<body>
   <!-- Scroll Progress Bar -->
   <div id="progressBar"></div>
-
-  <!-- Custom Cursor -->
-  <div class="custom-cursor" id="customCursor"></div>
 
   <!-- HERO SECTION -->
   <header class="hero" role="banner">
@@ -520,7 +506,6 @@
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <h1>Aditya Kashyap</h1>
-      
       <p>Sales Coordinator &amp; Data Analyst</p>
     </div>
   </header>
@@ -531,7 +516,6 @@
     <a href="#projects">Projects</a>
     <a href="#visualizations">Visualizations</a>
     <a href="#usecases">Use Cases</a>
-    <a href="#testimonials">Testimonials</a>
     <a href="#blog">Blog</a>
     <a href="#contact">Contact</a>
     <div class="nav-right">
@@ -620,15 +604,6 @@
               <li>Developed Python-based item matcher system to simplify code identification voluntarily.</li>
               <li>Improved reporting efficiency and supported management with data-driven insights.</li>
             </ul>
-            <!-- <div class="exp-metrics">
-              <strong>Key Metrics:</strong>
-              <ul>
-                <li>Managed 23,000+ SKUs</li>
-                <li>Automated KPI reporting (daily, weekly, monthly)</li>
-                <li>Standardized 13,000+ company names</li>
-                <li>Reduced freight costs by 20+ lakhs</li>
-              </ul>
-            </div> -->
           </div>
         </div>
 
@@ -636,32 +611,34 @@
         <div class="experience-card">
           <div class="exp-header">
             <span class="exp-company">Ritinox Overseas LLP</span>
-            <span class="exp-role">Export Sales Executive</span>
-            <span class="exp-duration">June 2023 – June 2024</span>
+            <span class="exp-role">Sales Coordinator</span>
+            <span class="exp-duration">June 2023 – April 2024</span>
           </div>
           <div class="exp-highlight">
             <strong>Key Responsibilities & Achievements:</strong>
             <ul>
-              <li>Coordinated export sales operations.</li>
-              <li>Handled client communication and documentation for overseas orders.</li>
-              <li>Assisted in preparing export quotations and shipping schedules.</li>
+              <li>Coordinated sales activities and managed client communications.</li>
+              <li>Assisted in the preparation of sales reports and presentations.</li>
+              <li>Maintained and updated customer databases and records.</li>
+              <li>Supported the sales team in daily administrative tasks.</li>
             </ul>
           </div>
         </div>
 
-        <!-- Digilegal Pvt. Ltd. -->
+        <!-- Internships & Projects -->
         <div class="experience-card">
           <div class="exp-header">
-            <span class="exp-company">Digilegal Pvt. Ltd.</span>
-            <span class="exp-role">Sales Executive</span>
-            <span class="exp-duration">Sept 2021 – Feb 2023</span>
+            <span class="exp-company">Internships & Projects</span>
+            <span class="exp-role">Data Analyst Intern</span>
+            <span class="exp-duration">Jan 2023 – May 2023</span>
           </div>
           <div class="exp-highlight">
             <strong>Key Responsibilities & Achievements:</strong>
             <ul>
-              <li>Worked as Sales Executive managing client relationships.</li>
-              <li>Generated quotations and closed deals.</li>
-              <li>Coordinated with teams to ensure smooth delivery of services.</li>
+              <li>Developed interactive dashboards using Tableau for sales data analysis.</li>
+              <li>Performed data cleaning and preprocessing using Python (Pandas, NumPy).</li>
+              <li>Created automated reports and visualizations for management.</li>
+              <li>Participated in client meetings to understand requirements and present findings.</li>
             </ul>
           </div>
         </div>
@@ -671,10 +648,8 @@
     <!-- SKILLS SECTION -->
     <section id="skills" aria-labelledby="skills-title">
       <h2 class="section-title" id="skills-title">Skills</h2>
-      <h3>Business Tools</h3>
+      <h3>Data Visualization & BI Tools</h3>
       <ul>
-        <li>SAP</li>
-        <li>Tally</li>
         <li>Advanced Excel (Pivot Tables, VLOOKUP/XLOOKUP, Formulas, Charts)</li>
         <li>Power BI</li>
         <li>Tableau</li>
@@ -734,19 +709,27 @@
       </div>
     </section>
 
-    <!-- DATA VISUALIZATIONS SECTION -->
-    <section id="visualizations" aria-labelledby="visualizations-title" style="display:flex; flex-direction:column; align-items:center;">
-  <h2 class="section-title" id="visualizations-title" style="margin: 0 auto 1.5rem auto; text-align:center; width:100%;">Data Visualizations</h2>
-  <div class="tableau-container tableau-container-wide" style="margin: 0 auto; width: 100%; max-width: 90vw; min-width: 0;">
-    <iframe 
-      src="https://public.tableau.com/views/ClientWiseFreightCosts/TopClients?:embed=y&:display_count=yes&:showVizHome=no<mark style="background-color: #BBDEFB;">&:toolbar=no&:tabs=no&:device=desktop</mark>"
-      allowfullscreen 
-      title="Client Wise Freight Costs"
-      style="border: none; display: block; background: #fff;">
-      </iframe>
-  </div>
-</section>
-    
+    <!-- DATA VISUALIZATIONS SECTION (replaced) -->
+    <section id="visualizations" aria-labelledby="visualizations-title">
+      <h2 class="section-title" id="visualizations-title">Data Visualizations</h2>
+
+      <div class="tableau-wrapper" aria-hidden="false">
+        <div class="tableau-container-wide" id="tableau-container">
+          <button class="fullscreen-toggle" id="tableau-fullscreen-toggle" aria-label="Toggle full-screen">⛶</button>
+          <iframe
+            id="tableau-iframe"
+            src="https://public.tableau.com/views/ClientWiseFreightCosts/TopClients?:embed=y&:display_count=yes&:showVizHome=no&:toolbar=no&:tabs=no"
+            allowfullscreen
+            loading="lazy"
+            title="Client Wise Freight Costs"
+          ></iframe>
+        </div>
+      </div>
+
+      <p style="text-align:center; color:var(--fade); margin:1rem auto; max-width:90vw;">
+        Interactive dashboard analyzing top clients' freight costs — built with Tableau for real-time insights.
+      </p>
+    </section>
 
     <!-- USE CASES SECTION -->
     <section id="usecases" aria-labelledby="usecases-title">
@@ -760,32 +743,10 @@
       </ul>
     </section>
 
-    <!-- TESTIMONIALS SECTION -->
-    <section id="testimonials" aria-labelledby="testimonials-title">
-      <h2 class="section-title" id="testimonials-title">Testimonials</h2>
-      <div class="testimonial-slider">
-        <div class="testimonial active">
-          "Aditya's blend of sales expertise and deep data insights transformed our operations. His innovative approach drives truly informed decision-making." – Sales Manager
-        </div>
-        <div class="testimonial">
-          "Working with Aditya meant clear, analytical insights that boosted our performance and efficiency." – Client Representative
-        </div>
-        <div class="testimonial">
-          "His ability to merge creative strategy with precise data analysis is unmatched." – Senior Executive
-        </div>
-      </div>
-    </section>
-
-    <!-- BLOG SECTION -->
-    <section id="blog" aria-labelledby="blog-title">
-      <h2 class="section-title" id="blog-title">Blog &amp; Insights</h2>
-      <p>Coming soon: In‑depth articles and guides on modern sales strategies, data analytics best practices, and innovative solutions bridging business and technology.</p>
-    </section>
-
     <!-- CONTACT SECTION -->
     <section id="contact" aria-labelledby="contact-title">
       <h2 class="section-title" id="contact-title">Contact</h2>
-      <p>Email: <a href="mailto:aditkashyap442@gmail.com">aadikashyap442@gmail.com</a></p>
+      <p>Email: <a href="mailto:aadikashyap442@gmail.com">aadikashyap442@gmail.com</a></p>
       <p>LinkedIn: <a href="https://www.linkedin.com/in/aditya-kashyap-235703288" target="_blank" rel="noopener noreferrer">linkedin.com/in/aditya-kashyap-235703288</a></p>
       <form class="contact-form" id="contactForm" aria-label="Contact Form">
         <label for="name">Name</label>
@@ -822,7 +783,9 @@
     function update() {
       const scrollPos = latestKnownScrollY;
       const heroVideo = document.getElementById('hero-video');
-      heroVideo.style.transform = `translate(-50%, calc(-50% + ${scrollPos * 0.5}px))`;
+      if (heroVideo) {
+        heroVideo.style.transform = `translate(-50%, calc(-50% + ${scrollPos * 0.5}px))`;
+      }
       ticking = false;
     }
     window.addEventListener("scroll", onScroll, false);
@@ -831,7 +794,7 @@
     function updateProgressBar() {
       const scrollPos = window.pageYOffset;
       const docHeight = document.body.scrollHeight - window.innerHeight;
-      const scrollPercent = (scrollPos / docHeight) * 100;
+      const scrollPercent = docHeight > 0 ? (scrollPos / docHeight) * 100 : 0;
       document.getElementById('progressBar').style.width = scrollPercent + '%';
     }
 
@@ -847,26 +810,15 @@
     }, observerOptions);
     sections.forEach(section => observer.observe(section));
 
-    /* ---------- Testimonial Slider ---------- */
-    const testimonials = document.querySelectorAll('.testimonial');
-    let currentTestimonial = 0;
-    setInterval(() => {
-      testimonials[currentTestimonial].classList.remove('active');
-      currentTestimonial = (currentTestimonial + 1) % testimonials.length;
-      testimonials[currentTestimonial].classList.add('active');
-    }, 5000);
-
-    // Removed Dark/Light Mode Toggle and Voice Search code
-
-  
-
     /* ---------- Simulated Contact Form Submission ---------- */
     const contactForm = document.getElementById('contactForm');
-    contactForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      alert('Thank you for your message! I will get back to you soon.');
-      contactForm.reset();
-    });
+    if (contactForm) {
+      contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Thank you for your message! I will get back to you soon.');
+        contactForm.reset();
+      });
+    }
 
     /* ---------- Service Worker Registration for PWA ---------- */
     if ('serviceWorker' in navigator) {
@@ -881,17 +833,75 @@
       });
     }
 
-    /* ---------- Custom Cursor Implementation ---------- */
-    const customCursor = document.getElementById('customCursor');
-    let cursorX = 0, cursorY = 0;
-    document.addEventListener('mousemove', function(e) {
-      cursorX = e.clientX;
-      cursorY = e.clientY;
-      requestAnimationFrame(updateCursor);
-    });
-    function updateCursor() {
-      customCursor.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
+    // Resize iframe to account for nav height when not fullscreen
+    function resizeTableauIframe() {
+      const iframe = document.getElementById('tableau-iframe');
+      const container = document.getElementById('tableau-container');
+      if (!iframe || !container) return;
+
+      const navHeight = document.querySelector('nav')?.offsetHeight || 0;
+      // If container is in fullscreen mode (CSS class or native), use full viewport
+      if (container.classList.contains('is-fullscreen') || document.fullscreenElement) {
+        iframe.style.height = '100vh';
+        iframe.style.width = '100%';
+      } else {
+        // set height so iframe fits inside visible area but keeps aspect ratio fallback
+        const availableHeight = Math.max(window.innerHeight - navHeight - 160, 320); // leave room for header/footer/caption
+        iframe.style.height = availableHeight + 'px';
+        iframe.style.width = '100%';
+      }
     }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // initial resize and on resize
+      resizeTableauIframe();
+      window.addEventListener('resize', resizeTableauIframe);
+
+      // Fullscreen toggle behavior
+      const toggle = document.getElementById('tableau-fullscreen-toggle');
+      const container = document.getElementById('tableau-container');
+      const iframe = document.getElementById('tableau-iframe');
+
+      if (toggle && container) {
+        toggle.addEventListener('click', async () => {
+          try {
+            if (!document.fullscreenElement) {
+              // try native fullscreen on the container
+              await container.requestFullscreen();
+              container.classList.add('is-fullscreen');
+              toggle.textContent = '↙';
+            } else {
+              await document.exitFullscreen();
+              container.classList.remove('is-fullscreen');
+              toggle.textContent = '⛶';
+            }
+            // allow layout to settle then resize
+            setTimeout(resizeTableauIframe, 160);
+          } catch (err) {
+            console.warn('Fullscreen toggle failed:', err);
+          }
+        });
+
+        // keep class in sync with native fullscreen changes
+        document.addEventListener('fullscreenchange', () => {
+          if (!document.fullscreenElement) {
+            container.classList.remove('is-fullscreen');
+            toggle.textContent = '⛶';
+          } else {
+            container.classList.add('is-fullscreen');
+            toggle.textContent = '↙';
+          }
+          resizeTableauIframe();
+        });
+      }
+
+      // optional: postMessage to Tableau iframe to request resize if needed (best-effort)
+      iframe?.addEventListener('load', () => {
+        try {
+          iframe.contentWindow.postMessage({ type: 'resizeRequest', width: iframe.offsetWidth, height: iframe.offsetHeight }, '*');
+        } catch (e) { /* cross-origin may block this; ignore silently */ }
+      });
+    });
   </script>
 </body>
 </html>
